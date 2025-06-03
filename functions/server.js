@@ -1,5 +1,6 @@
 const express = require('express');
 const serverless = require('serverless-http');
+const axios = require('axios');
 
 const app = express();
 
@@ -18,6 +19,22 @@ app.get('/', (req, res) => {
 // API endpoint
 app.get('/api', (req, res) => {
   res.json({ message: '¡Hola Mundo desde la API!' });
+});
+
+// Ejemplo de endpoint usando axios
+app.get('/api/example', async (req, res) => {
+  try {
+    const response = await axios.get('https://jsonplaceholder.typicode.com/todos/1');
+    res.json({
+      message: 'Datos obtenidos con axios',
+      data: response.data
+    });
+  } catch (error) {
+    res.status(500).json({
+      error: 'Error al obtener datos',
+      message: error.message
+    });
+  }
 });
 
 // Handle all other routes
