@@ -23,9 +23,11 @@ app.get('/api', (req, res) => {
 // Export the serverless handler
 const handler = serverless(app);
 module.exports.handler = async (event, context) => {
-  // Ensure the path is properly handled
+  // Map the paths correctly
   if (event.path === '/.netlify/functions/server') {
     event.path = '/';
+  } else if (event.path === '/.netlify/functions/server/api') {
+    event.path = '/api';
   }
   return handler(event, context);
 }; 
