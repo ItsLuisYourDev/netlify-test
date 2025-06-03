@@ -20,14 +20,17 @@ app.get('/api', (req, res) => {
   res.json({ message: '¡Hola Mundo desde la API!' });
 });
 
+// Handle all other routes
+app.use((req, res) => {
+  res.status(404).json({ error: 'Not Found' });
+});
+
 // Export the serverless handler
 const handler = serverless(app);
 module.exports.handler = async (event, context) => {
-  // Map the paths correctly
-  if (event.path === '/.netlify/functions/server') {
-    event.path = '/';
-  } else if (event.path === '/.netlify/functions/server/api') {
-    event.path = '/api';
+  // Remove the /.netlify/functions/server prefix from the path
+  if (event.path.startsWith('/.netlify/functions/server')) {
+    event.path = event.path.replace('/.netlify/functions/server', '') || '/';
   }
   return handler(event, context);
 }; 
