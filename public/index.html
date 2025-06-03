@@ -21,12 +21,35 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+        .endpoints {
+            margin-top: 2rem;
+            text-align: left;
+            padding: 1rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .endpoints h3 {
+            margin-top: 0;
+        }
+        .endpoints a {
+            display: block;
+            margin: 0.5rem 0;
+            color: #0066cc;
+            text-decoration: none;
+        }
+        .endpoints a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Express App en Netlify</h1>
-        <p>Para ver el mensaje de la API, visita <a href="/.netlify/functions/server">este enlace</a></p>
+        <div class="endpoints">
+            <h3>Endpoints disponibles:</h3>
+            <a href="/.netlify/functions/server" target="_blank">API Root (/.netlify/functions/server)</a>
+            <a href="/.netlify/functions/server/api" target="_blank">API Endpoint (/.netlify/functions/server/api)</a>
+        </div>
     </div>
 </body>
 </html> 
